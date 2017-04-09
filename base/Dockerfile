@@ -18,10 +18,10 @@ RUN wget --quiet -O android-sdk.zip https://dl.google.com/android/repository/too
 WORKDIR /
 
 # Platform tools first because tools depends on it. Then repositories
-RUN echo y | tools/android --silent update sdk --no-ui --all --filter platform-tools
-RUN echo y | tools/android --silent update sdk --no-ui --all --filter tools
-RUN echo y | tools/android --silent update sdk --no-ui --all --filter extra-android-m2repository && \
-    echo y | tools/android --silent update sdk --no-ui --all --filter extra-google-google_play_services && \
-    echo y | tools/android --silent update sdk --no-ui --all --filter extra-google-m2repository
+RUN echo y | android/tools/android --silent update sdk --no-ui --all --filter platform-tools
+RUN echo y | android/tools/android --silent update sdk --no-ui --all --filter tools
+RUN echo y | android/tools/android --silent update sdk --no-ui --all --filter extra-android-m2repository && \
+    echo y | android/tools/android --silent update sdk --no-ui --all --filter extra-google-google_play_services && \
+    echo y | android/tools/android --silent update sdk --no-ui --all --filter extra-google-m2repository
 
 CMD ["/bin/bash"]
