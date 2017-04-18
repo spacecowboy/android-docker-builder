@@ -3,7 +3,7 @@ MAINTAINER Jonas Kalderstam <jonas@cowboyprogrammer.org>
 
 # https://developer.android.com/studio/index.html
 ENV ANDROID_HOME=/android \
-    PATH=/android/tools:$PATH \
+    PATH=/android/tools/bin/:/android/tools/:/android/platform-tools/:$PATH \
     ANDROID_SDK_TOOLS="25.2.5"
 
 RUN apt-get --quiet update --yes && \
@@ -14,6 +14,10 @@ RUN apt-get --quiet update --yes && \
 RUN mkdir -p ${ANDROID_HOME} && \
     wget --quiet -O ${ANDROID_HOME}/tools.zip https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip && \
     unzip -qq ${ANDROID_HOME}/tools.zip -d ${ANDROID_HOME} && \
-    rm -f ${ANDROID_HOME}/tools.zip
+    rm -f ${ANDROID_HOME}/tools.zip && \
+    echo y | sdkmanager --update && \
+    echo y | sdkmanager "extras;android;m2repository" \
+                        "extras;google;google_play_services" \
+                        "extras;google;m2repository"
 
 CMD ["/bin/bash"]
