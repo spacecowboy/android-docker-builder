@@ -1,13 +1,21 @@
 FROM openjdk:8-jdk
 MAINTAINER Jonas Kalderstam <jonas@cowboyprogrammer.org>
 
-# https://developer.android.com/studio/index.html
+# Also, the emulator can't find its own libraries from the SDK with LD_LIBRARY_PATH.
 ENV ANDROID_HOME=/android \
     PATH=/android/tools/bin/:/android/tools/:/android/platform-tools/:$PATH \
-    ANDROID_SDK_TOOLS="25.2.5"
+    ANDROID_SDK_TOOLS="25.2.5" \
+    LD_LIBRARY_PATH=$ANDROID_HOME/tools/lib64:$ANDROID_HOME/tools/lib64/qt/lib:$LD_LIBRARY_PATH
 
 RUN apt-get --quiet update --yes && \
-    apt-get --quiet install --yes --no-install-recommends wget tar unzip lib32stdc++6 lib32z1 && \
+    apt-get --quiet install --yes --no-install-recommends wget \
+                                                          tar \
+                                                          unzip \
+                                                          lib32stdc++6 \
+                                                          lib32z1 \
+                                                          file \
+                                                          mesa-utils \
+                                                          pciutils && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and unzip SDK
