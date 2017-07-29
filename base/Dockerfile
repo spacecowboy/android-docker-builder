@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM openjdk:7-jdk
 MAINTAINER Jonas Kalderstam <jonas@cowboyprogrammer.org>
 
 # Also, the emulator can't find its own libraries from the SDK with LD_LIBRARY_PATH.
