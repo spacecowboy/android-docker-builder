@@ -23,7 +23,7 @@ RUN apt-get --quiet update --yes && \
 
 # Download and unzip SDK
 RUN mkdir -p ${ANDROID_HOME} && \
-    wget --quiet -O "${ANDROID_HOME}/tools.zip" https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip && \
+    wget --quiet -O "${ANDROID_HOME}/tools.zip" https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip && \
     unzip -qq "${ANDROID_HOME}/tools.zip" -d ${ANDROID_HOME} && \
     rm -f ${ANDROID_HOME}/tools.zip && \
     echo y | sdkmanager --sdk_root=${ANDROID_HOME} --update && \
